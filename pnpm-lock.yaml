@@ -18,10 +18,12 @@ specifiers:
   eslint-config-prettier: ^8.3.0
   eslint-plugin-storybook: ^0.5.7
   eslint-plugin-svelte3: ^3.2.1
+  nightwind: ^1.1.12
   postcss: ^8.4.12
   postcss-preset-env: ^7.4.3
   prettier: ^2.5.1
   prettier-plugin-svelte: ^2.5.0
+  storybook-dark-mode: ^1.0.9
   svelte: ^3.46.5
   svelte-check: ^2.2.6
   svelte-loader: ^3.1.2
@@ -48,10 +50,12 @@ devDependencies:
   eslint-config-prettier: 8.5.0_eslint@7.32.0
   eslint-plugin-storybook: 0.5.7_eslint@7.32.0+typescript@4.6.3
   eslint-plugin-svelte3: 3.4.1_eslint@7.32.0+svelte@3.46.5
+  nightwind: 1.1.12_tailwindcss@3.0.23
   postcss: 8.4.12
   postcss-preset-env: 7.4.3_postcss@8.4.12
   prettier: 2.6.1
   prettier-plugin-svelte: 2.6.0_prettier@2.6.1+svelte@3.46.5
+  storybook-dark-mode: 1.0.9
   svelte: 3.46.5
   svelte-check: 2.4.6_77b2ef9c032436216b21af2c114e10cd
   svelte-loader: 3.1.2_svelte@3.46.5
@@ -9007,6 +9011,14 @@ packages:
     resolution: {integrity: sha512-1nh45deeb5olNY7eX82BkPO7SSxR5SSYJiPTrTdFUVYwAl8CKMA5N9PjTYkHiRjisVcxcQ1HXdLhx2qxxJzLNQ==}
     dev: true
 
+  /nightwind/1.1.12_tailwindcss@3.0.23:
+    resolution: {integrity: sha512-iJGJxeglk3vrRyFDH7shinvKuN/EcIbBtNVkko0Zni/XGVSHrBH0rsvqgp2HhkIf5B7iZU+2+kGhS2oItBnASQ==}
+    peerDependencies:
+      tailwindcss: ^2.0.0
+    dependencies:
+      tailwindcss: 3.0.23
+    dev: true
+
   /no-case/3.0.4:
     resolution: {integrity: sha512-fgAN3jGAh+RoxUGZHTSOLJIqUc2wmoBwGR4tbpNAKmmovFoWq0OdRkb0VkldReO2a2iBT/OEulG9XSUc10r3zg==}
     dependencies:
@@ -11566,6 +11578,19 @@ packages:
 
   /store2/2.13.2:
     resolution: {integrity: sha512-CMtO2Uneg3SAz/d6fZ/6qbqqQHi2ynq6/KzMD/26gTkiEShCcpqFfTHgOxsE0egAq6SX3FmN4CeSqn8BzXQkJg==}
+    dev: true
+
+  /storybook-dark-mode/1.0.9:
+    resolution: {integrity: sha512-ITPXM2OSaga1zM5blpZy5HxMWAhrAqYi9aJtLgRtSdgoRrxVNAInDRD14TjmObdgLHNWxINoNbnEB+sKETa+iw==}
+    peerDependencies:
+      '@storybook/addons': ^6.0.0
+      '@storybook/api': ^6.0.0
+      '@storybook/components': ^6.0.0
+      '@storybook/core-events': ^6.0.0
+      '@storybook/theming': ^6.0.0
+    dependencies:
+      fast-deep-equal: 3.1.3
+      memoizerific: 1.11.3
     dev: true
 
   /stream-browserify/2.0.2:
