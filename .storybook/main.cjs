@@ -17,7 +17,8 @@ module.exports = {
 	framework: '@storybook/svelte',
 	svelteOptions: {
 		preprocess: require('svelte-preprocess')({
-			typescript: true
+			typescript: true,
+			postcss: true
 		})
 	}
 };
