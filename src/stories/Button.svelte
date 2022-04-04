@@ -43,10 +43,8 @@
 
 <style global lang="postcss">
 	:local(.storybook-button) {
-		@apply cursor-pointer rounded-3xl border-0;
-
-		font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-		font-weight: 700;
+		@apply cursor-pointer rounded-3xl border-0 font-bold;
+		font-family: Nunito Sans, Helvetica Neue, Helvetica, Arial, sans-serif;
 
 		&--primary {
 			@apply text-white bg-blue-500;
