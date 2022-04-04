@@ -4,6 +4,7 @@ module.exports = {
 		'@storybook/addon-links',
 		'@storybook/addon-essentials',
 		'@storybook/addon-svelte-csf',
+		'storybook-dark-mode',
 		{
 			name: '@storybook/addon-postcss',
 			options: {
@@ -16,7 +17,8 @@ module.exports = {
 	framework: '@storybook/svelte',
 	svelteOptions: {
 		preprocess: require('svelte-preprocess')({
-			typescript: true
+			typescript: true,
+			postcss: true
 		})
 	}
 };
