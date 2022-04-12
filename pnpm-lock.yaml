@@ -28,6 +28,7 @@ specifiers:
   prettier: ^2.6.2
   prettier-plugin-svelte: ^2.6.0
   prettier-plugin-tailwindcss: ^0.1.8
+  storybook-addon-paddings: ^4.3.0
   storybook-dark-mode: ^1.0.9
   storybook-fixtures: ^0.11.0
   stylelint: ^14.6.1
@@ -49,7 +50,7 @@ devDependencies:
   '@storybook/addon-svelte-csf': 1.1.2_f56a27844a6a546e4d6ab4135066eff7
   '@storybook/svelte': 6.4.20_ef8f8f8f15c6162fa33c4ea6b77ff9d0
   '@sveltejs/adapter-auto': 1.0.0-next.34
-  '@sveltejs/kit': 1.0.0-next.310_svelte@3.46.6
+  '@sveltejs/kit': 1.0.0-next.311_svelte@3.46.6
   '@typescript-eslint/eslint-plugin': 5.18.0_93fd1b55dafbdf76506419beaedce909
   '@typescript-eslint/parser': 5.18.0_eslint@7.32.0+typescript@4.6.3
   babel-loader: 8.2.4_@babel+core@7.17.8
@@ -68,6 +69,7 @@ devDependencies:
   prettier: 2.6.2
   prettier-plugin-svelte: 2.6.0_prettier@2.6.2+svelte@3.46.6
   prettier-plugin-tailwindcss: 0.1.8_prettier@2.6.2
+  storybook-addon-paddings: 4.3.0
   storybook-dark-mode: 1.0.9
   storybook-fixtures: 0.11.0
   stylelint: 14.6.1
@@ -3844,8 +3846,8 @@ packages:
       esbuild: 0.14.34
     dev: true
 
-  /@sveltejs/kit/1.0.0-next.310_svelte@3.46.6:
-    resolution: {integrity: sha512-pTyMyaoyHS+V5cQZIQMfQXmLkhw1VaRwT9avOSgwDc0QBpnNw2LdzwoPYsUr96ca5B6cfT3SMUNolxErTNHmPQ==}
+  /@sveltejs/kit/1.0.0-next.311_svelte@3.46.6:
+    resolution: {integrity: sha512-OkRIi0XBXcs16J+H+6fgOeFYxKu05gamY08KHAQ5cohjymUODGWIwaIfwAuNkZAcEEr8Vh2ejp4UcaxNzD53lQ==}
     engines: {node: '>=14.13'}
     hasBin: true
     peerDependencies:
@@ -11885,6 +11887,27 @@ packages:
 
   /store2/2.13.2:
     resolution: {integrity: sha512-CMtO2Uneg3SAz/d6fZ/6qbqqQHi2ynq6/KzMD/26gTkiEShCcpqFfTHgOxsE0egAq6SX3FmN4CeSqn8BzXQkJg==}
+    dev: true
+
+  /storybook-addon-paddings/4.3.0:
+    resolution: {integrity: sha512-AgIhxVBMbBInjxwBOb4MhbMjE61HOB9aS63lF1Ycd+wA6u1BBkVlMUGrwLeT+yZNf/Fmz1lxJ6gvKdaB5qHw1A==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+    peerDependenciesMeta:
+      react:
+        optional: true
+      react-dom:
+        optional: true
+    dependencies:
+      '@storybook/addons': 6.4.20
+      '@storybook/api': 6.4.20
+      '@storybook/components': 6.4.20
+      '@storybook/theming': 6.4.20
+      core-js: 3.21.1
+      memoizerific: 1.11.3
+    transitivePeerDependencies:
+      - '@types/react'
     dev: true
 
   /storybook-dark-mode/1.0.9:

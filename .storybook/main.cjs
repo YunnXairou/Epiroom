@@ -4,6 +4,7 @@ module.exports = {
 		'@storybook/addon-links',
 		'@storybook/addon-essentials',
 		'@storybook/addon-svelte-csf',
+		'storybook-addon-paddings',
 		'storybook-fixtures',
 		'storybook-dark-mode',
 		{
