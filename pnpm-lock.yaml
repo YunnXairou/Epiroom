@@ -10,6 +10,8 @@ specifiers:
   '@storybook/svelte': ^6.4.20
   '@sveltejs/adapter-auto': next
   '@sveltejs/kit': next
+  '@types/lodash-es': ^4.17.6
+  '@types/luxon': ^2.3.1
   '@typescript-eslint/eslint-plugin': ^5.18.0
   '@typescript-eslint/parser': ^5.18.0
   babel-loader: ^8.2.4
@@ -18,6 +20,8 @@ specifiers:
   eslint-config-prettier: ^8.5.0
   eslint-plugin-storybook: ^0.5.7
   eslint-plugin-svelte3: ^3.4.1
+  lodash-es: ^4.17.21
+  luxon: ^2.3.1
   nightwind: ^1.1.12
   postcss: ^8.4.12
   postcss-hexrgba: ^2.0.1
@@ -41,6 +45,10 @@ specifiers:
   tslib: ^2.3.1
   typescript: ~4.6.3
 
+dependencies:
+  lodash-es: 4.17.21
+  luxon: 2.3.1
+
 devDependencies:
   '@babel/core': 7.17.8
   '@storybook/addon-actions': 6.4.20
@@ -51,6 +59,8 @@ devDependencies:
   '@storybook/svelte': 6.4.20_ef8f8f8f15c6162fa33c4ea6b77ff9d0
   '@sveltejs/adapter-auto': 1.0.0-next.34
   '@sveltejs/kit': 1.0.0-next.311_svelte@3.46.6
+  '@types/lodash-es': 4.17.6
+  '@types/luxon': 2.3.1
   '@typescript-eslint/eslint-plugin': 5.18.0_93fd1b55dafbdf76506419beaedce909
   '@typescript-eslint/parser': 5.18.0_eslint@7.32.0+typescript@4.6.3
   babel-loader: 8.2.4_@babel+core@7.17.8
@@ -3947,6 +3957,20 @@ packages:
 
   /@types/json-schema/7.0.11:
     resolution: {integrity: sha512-wOuvG1SN4Us4rez+tylwwwCV1psiNVOkJeM3AUWUNWg/jDQY2+HE/444y5gc+jBmRqASOm2Oeh5c1axHobwRKQ==}
+    dev: true
+
+  /@types/lodash-es/4.17.6:
+    resolution: {integrity: sha512-R+zTeVUKDdfoRxpAryaQNRKk3105Rrgx2CFRClIgRGaqDTdjsm8h6IYA8ir584W3ePzkZfst5xIgDwYrlh9HLg==}
+    dependencies:
+      '@types/lodash': 4.14.181
+    dev: true
+
+  /@types/lodash/4.14.181:
+    resolution: {integrity: sha512-n3tyKthHJbkiWhDZs3DkhkCzt2MexYHXlX0td5iMplyfwketaOeKboEVBqzceH7juqvEg3q5oUoBFxSLu7zFag==}
+    dev: true
+
+  /@types/luxon/2.3.1:
+    resolution: {integrity: sha512-nAPUltOT28fal2eDZz8yyzNhBjHw1NEymFBP7Q9iCShqpflWPybxHbD7pw/46jQmT+HXOy1QN5hNTms8MOTlOQ==}
     dev: true
 
   /@types/mdast/3.0.10:
@@ -8702,6 +8726,10 @@ packages:
       p-locate: 5.0.0
     dev: true
 
+  /lodash-es/4.17.21:
+    resolution: {integrity: sha512-mKnC+QJ9pWVzv+C4/U3rRsHapFfHvQFoFB92e52xeyGMcX6/OlIl78je1u8vePzYZSkkogMPJ2yjxxsb89cxyw==}
+    dev: false
+
   /lodash.debounce/4.0.8:
     resolution: {integrity: sha1-gteb/zCmfEAF/9XiUVMArZyk168=}
     dev: true
@@ -8758,6 +8786,11 @@ packages:
     dependencies:
       yallist: 4.0.0
     dev: true
+
+  /luxon/2.3.1:
+    resolution: {integrity: sha512-I8vnjOmhXsMSlNMZlMkSOvgrxKJl0uOsEzdGgGNZuZPaS9KlefpE9KV95QFftlJSC+1UyCC9/I69R02cz/zcCA==}
+    engines: {node: '>=12'}
+    dev: false
 
   /magic-string/0.25.9:
     resolution: {integrity: sha512-RmF0AsMzgt25qzqqLc1+MbHmhdx0ojF2Fvs4XnOqz2ZOBXzzkEwc/dJQZCYHAn7v1jbVOjAZfK8msRn4BxO4VQ==}
