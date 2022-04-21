@@ -31,10 +31,10 @@
 </Template>
 
 <Story
-	name="one"
+	name="Callendar"
 	args={{
 		steps: 4,
-		from: 8,
-		to: 20
+		from: 9,
+		to: 19
 	}}
 />

@@ -20,7 +20,7 @@
 	$: if (isEmpty(events)) events = { '': [] };
 	const gridRow = (idx: number) => `${idx * steps + 2}/ ${steps} span`;
 
-	$: sections = range(from, to);
+	$: sections = range(Math.min(from, to), Math.max(from, to));
 	$: classMatrix =
 		steps == 1 ? ['hour'] : steps == 2 ? ['hour', 'half'] : ['hour', 'quarter', 'half', 'quarter'];
 	$: data = Object.entries(events).map(([k, v], idx) => [
@@ -64,15 +64,15 @@
 				const rend = edx < 0 ? sections.length * steps : edx * steps + emx;
 
 				return Object.assign(g, {
+					cls: classMatrix[rstart % steps],
 					area: {
-						inset: `${rstart + 1}/${idx + 1}/span ${rend - rstart}/auto`,
-						offset: `${rstart + 2}/${idx + 2}/span ${rend - rstart}/auto`
+						inset: `${rstart + 1}/${idx + 1}/span ${Math.max(1, rend - rstart)}/auto`,
+						offset: `${rstart + 2}/${idx + 2}/span ${Math.max(1, rend - rstart)}/auto`
 					}
 				});
 			})
 	]);
 	$: skipArea = Object.values(data.flatMap((_) => _[1]).map((_) => _.area.inset));
-	$: console.log(skipArea);
 </script>
 
 <div
@@ -87,7 +87,7 @@
 	{#each data as [k, v]}
 		<span class="bg-zinc-200 text-center text-zinc-800 sticky top-0 snap-center">{k}</span>
 		{#each v as g}
-			<div style="grid-area: {g.area.offset}" />
+			<div class="{g.cls} bg-slate-400" style="grid-area: {g.area.offset}" />
 		{/each}
 	{/each}
 
@@ -122,7 +122,7 @@
 		.hour,
 		.half,
 		.quarter {
-			@apply border-zinc-200 border-t border-x border-solid snap-center;
+			@apply border-zinc-200 border-t border-x border-solid;
 
 			&.grid {
 				@apply border-none;
