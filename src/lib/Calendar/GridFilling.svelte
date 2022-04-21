@@ -5,8 +5,6 @@
 	export let classMatrix: string[] = [];
 	export let skipArea: string[] = [];
 
-	$: console.log(flowRow);
-
 	function computeSpan(idxText: string, spanText: string): [string, string] {
 		const span = spanText.match(/\d+/);
 		if (!span) return [idxText, spanText];
@@ -22,7 +20,6 @@
 	}
 
 	$: skips = [...(Array.isArray(skipArea) ? skipArea : [])];
-
 	$: matrix = Array.from({ length: flowRow ? rows : cols }, (_, r) =>
 		Array.from({ length: flowRow ? cols : rows }, (_, c) =>
 			classMatrix
@@ -33,12 +30,12 @@
 		)
 	)
 		.map((rows, rdx) =>
-			rows.filter((cols, cdx) => {
+			rows.filter((_, cdx) => {
 				const reg = [
-					`(\\s*[\\w\\s]*${(flowRow ? rdx : cdx) + 1}\\s*)`,
-					`(\\s*[\\w\\s]*${(flowRow ? cdx : rdx) + 1}\\s*)`,
-					`(\\s*[\\w\\s\\d]+\\s*)`,
-					`(\\s*[\\w\\s\\d]+\\s*)`
+					`^([a-zA-Z\\s]*${(flowRow ? rdx : cdx) + 1}\\s*)`,
+					`([a-zA-Z\\s]*${(flowRow ? cdx : rdx) + 1}\\s*)`,
+					`([\\w\\s]+)`,
+					`([\\w\\s]+)$`
 				].join('\\/');
 
 				const area = skips.find((a) => a.match(`^${reg}$`));
