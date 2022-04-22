@@ -114,7 +114,11 @@
 	<span class="bg-zinc-200 sticky top-0 left-0" />
 
 	{#each data as [k, v]}
-		<span class="bg-zinc-200 text-center text-zinc-800 sticky top-0 snap-center">{k}</span>
+		<span
+			class="bg-zinc-200 text-center text-zinc-800 sticky top-0 snap-center truncate p-2"
+			dir="rtl"
+			id={k}>{k}</span
+		>
 
 		{#each v as g}
 			{#if g.events.length > 1}
