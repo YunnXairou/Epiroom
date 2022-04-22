@@ -23,56 +23,85 @@
 	$: sections = range(Math.min(from, to), Math.max(from, to));
 	$: classMatrix =
 		steps == 1 ? ['hour'] : steps == 2 ? ['hour', 'half'] : ['hour', 'quarter', 'half', 'quarter'];
-	$: data = Object.entries(events).map(([k, v], idx) => [
+	$: data = Object.entries(events).map(([k, v], cdx) => [
 		k,
-		v
-			.reduce(
-				(prev, cur, idx) => {
-					const node = {
-						start: DateTime.fromFormat(cur.start, 'yyyy-L-d h:m:s'),
-						end: DateTime.fromFormat(cur.end, 'yyyy-L-d h:m:s')
-					};
+		v.reduce((prev, cur) => {
+			const start = DateTime.fromFormat(cur.start, 'yyyy-L-d h:m:s');
+			const end = DateTime.fromFormat(cur.end, 'yyyy-L-d h:m:s');
 
-					for (let jdx = 0; jdx < idx; jdx++) {
-						if (
-							(prev[jdx].start >= node.start && prev[jdx].end <= node.start) ||
-							(prev[jdx].start < node.end && prev[jdx].end >= node.end)
-						) {
-							prev[jdx].events.push(cur);
-							prev[jdx].end =
-								prev[jdx].end.diff(node.end).milliseconds < 0 ? node.end : prev[jdx].end;
-							return prev;
-						}
+			const sdx = sections.indexOf(start.hour);
+			const edx = sections.indexOf(end.hour);
+
+			let rstart = sdx * steps + Math.floor(start.minute / (60 / steps));
+			let rend = edx * steps + Math.ceil(end.minute / (60 / steps));
+
+			console.log('---');
+			console.log(rstart, rend);
+
+			if (sdx < 0)
+				rstart = Math.max(
+					0,
+					(sections[0] > start.hour ? rend : sections.length * steps) -
+						Math.ceil(end.diff(start, 'minutes').minutes / (60 / steps))
+				);
+
+			console.log(rstart, rend);
+
+			if (edx < 0 || rstart == rend)
+				rend = Math.min(
+					sections.length * steps,
+					rstart +
+						(sections[0] >= end.hour
+							? Math.min(steps, Math.ceil(end.diff(start, 'minutes').minutes / (60 / steps)))
+							: Math.ceil(end.diff(start, 'minutes').minutes / (60 / steps)))
+				);
+
+			console.log(rstart, rend);
+
+			if (sections[0] <= start.hour && sdx < 0)
+				rstart =
+					rend - Math.ceil(steps - ((end.diff(start, 'minutes').minutes / (60 / steps)) % steps));
+
+			console.log(rstart, rend);
+
+			for (let jdx = 0; jdx < prev.length; jdx++) {
+				console.log(prev[jdx].area.start, rstart, prev[jdx].area.end, rend);
+				if (
+					(prev[jdx].area.start >= rstart && prev[jdx].area.end >= rstart) ||
+					(prev[jdx].area.start < rend && prev[jdx].area.end >= rend)
+				) {
+					prev[jdx].events.push(cur);
+					if (prev[jdx].end.diff(end).milliseconds < 0) {
+						prev[jdx].end = end;
+						prev[jdx].area.end = rend;
 					}
+					return prev;
+				}
+			}
 
-					return [...prev, { ...node, events: [cur] }];
-				},
-				[] as {
-					start: DateTime;
-					end: DateTime;
-					events: any[];
-				}[]
-			)
-			.map((g) => {
-				const sdx = sections.indexOf(g.start.hour);
-				const edx = sections.indexOf(g.end.hour);
-
-				const smx = Math.floor(g.start.minute / (60 / steps));
-				const rstart = sdx < 0 ? 0 : sdx * steps + smx;
-
-				const emx = Math.floor(g.end.minute / (60 / steps));
-				const rend = edx < 0 ? sections.length * steps : edx * steps + emx;
-
-				return Object.assign(g, {
+			return [
+				...prev,
+				{
+					events: [cur],
+					start,
+					end,
 					cls: classMatrix[rstart % steps],
 					area: {
-						inset: `${rstart + 1}/${idx + 1}/span ${Math.max(1, rend - rstart)}/auto`,
-						offset: `${rstart + 2}/${idx + 2}/span ${Math.max(1, rend - rstart)}/auto`
+						start: rstart,
+						end: rend,
+						get inset() {
+							return `${this.start + 1}/${cdx + 1}/span ${this.end - this.start}/auto`;
+						},
+						get offset() {
+							return `${this.start + 2}/${cdx + 2}/span ${this.end - this.start}/auto`;
+						}
 					}
-				});
-			})
+				}
+			];
+		}, [])
 	]);
 	$: skipArea = Object.values(data.flatMap((_) => _[1]).map((_) => _.area.inset));
+	$: console.log(data);
 </script>
 
 <div
@@ -86,8 +115,13 @@
 
 	{#each data as [k, v]}
 		<span class="bg-zinc-200 text-center text-zinc-800 sticky top-0 snap-center">{k}</span>
+
 		{#each v as g}
-			<div class="{g.cls} bg-slate-400" style="grid-area: {g.area.offset}" />
+			{#if g.events.length > 1}
+				<div class="{g.cls} bg-red-400" style="grid-area: {g.area.offset}" />
+			{:else}
+				<div class="{g.cls} bg-slate-400" style="grid-area: {g.area.offset}" />
+			{/if}
 		{/each}
 	{/each}
 
@@ -122,7 +156,7 @@
 		.hour,
 		.half,
 		.quarter {
-			@apply border-zinc-200 border-t border-x border-solid;
+			@apply border-zinc-200 border-t border-x border-solid snap-center;
 
 			&.grid {
 				@apply border-none;
