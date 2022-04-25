@@ -1,5 +1,5 @@
 .wrapper {
-	@apply text-black border-black/10 flex items-center justify-between;
+	@apply text-black flex items-center justify-between border-black/10;
 
 	font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 	border-bottom: 1px solid;
@@ -28,5 +28,5 @@ button + button {
 }
 
 .welcome {
-	@apply text-slate-900 text-sm mr-2.5;
+	@apply text-slate-900 mr-2.5 text-sm;
 }

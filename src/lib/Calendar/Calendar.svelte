@@ -157,7 +157,7 @@
 		.hour,
 		.half,
 		.quarter {
-			@apply border-zinc-200 border-t border-x border-solid snap-center;
+			@apply border-zinc-200 snap-center border-x border-t border-solid;
 
 			&.grid {
 				@apply border-none;
