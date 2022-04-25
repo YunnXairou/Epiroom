@@ -27,7 +27,9 @@
 />
 
 <Template let:args let:context>
-	<Calendar {...args} events={context.fixture} />
+	<Calendar {...args} events={context.fixture}>
+		<span class="w-full h-full block bg-slate-400" />
+	</Calendar>
 </Template>
 
 <Story

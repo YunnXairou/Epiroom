@@ -54,7 +54,9 @@
     grid-template-rows: repeat({rows}, {(20 * 4) / steps}px);"
 >
 	{#each events as e, i}
-		<div class="{getCls(e)} bg-slate-400" style="grid-area: {areas[i]}" />
+		<div class={getCls(e)} style="grid-area: {areas[i]}">
+			<slot {e} />
+		</div>
 	{/each}
 
 	<GridFilling {rows} {cols} {classMatrix} skipArea={areas} />

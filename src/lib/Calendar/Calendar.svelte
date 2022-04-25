@@ -23,7 +23,7 @@
 
 	$: sections = range(Math.min(from, to), Math.max(from, to));
 	$: classMatrix =
-		steps == 1 ? ['hour'] : steps == 2 ? ['hour', 'half'] : ['hour', 'quarter', 'half', 'quarter'];
+		steps == 1 ? ['hour'] : steps == 2 ? ['half', 'hour'] : ['quarter', 'half', 'quarter', 'hour'];
 	$: data = Object.entries(events).map(([k, v], cdx) => [
 		k,
 		v.reduce((prev, cur) => {
@@ -77,7 +77,7 @@
 					events: [cur],
 					start,
 					end,
-					cls: classMatrix[rstart % steps],
+					cls: classMatrix[(rend - 1) % steps],
 					area: {
 						start: rstart,
 						end: rend,
@@ -110,27 +110,33 @@
 		grid-template-rows: 5ch repeat({sections.length * steps}, {(20 * 4) / steps}px);
 	"
 >
-	<span class="bg-zinc-200 sticky top-0 left-0" />
+	<span class="bg-white sticky top-0 left-0 border-b" />
 
 	{#each data as [k, v]}
 		<span
-			class="bg-zinc-200 text-center text-zinc-800 sticky top-0 snap-center truncate p-2"
+			class="bg-white text-center text-zinc-800 sticky top-0 snap-center truncate p-2 border-b"
 			dir="rtl"
-			id={k}>{k}</span
+			id={k}
 		>
+			{k}
+		</span>
 
 		{#each v as g}
 			{#if g.events.length > 1}
-				<SubGrid classMatrix={offsetMatrix(g.area.start)} {steps} {...g} />
+				<SubGrid classMatrix={offsetMatrix(g.area.start)} {steps} {...g} let:e>
+					<slot {e} />
+				</SubGrid>
 			{:else}
-				<div class="{g.cls} bg-slate-400" style="grid-area: {g.area.offset}" />
+				<div class="{g.cls} relative" style="grid-area: {g.area.offset}">
+					<slot e={g.events} />
+				</div>
 			{/if}
 		{/each}
 	{/each}
 
 	{#each sections as h, i}
 		<span
-			class="bg-zinc-200 text-zinc-800 text-center sticky top-[5ch] left-0"
+			class="bg-white text-zinc-800 text-center sticky top-[5ch] left-0 border-b border-r"
 			style="grid-row: {gridRow(i)}"
 		>
 			{h}:00
@@ -159,10 +165,10 @@
 		.hour,
 		.half,
 		.quarter {
-			@apply border-zinc-200 snap-center border-x border-t border-solid;
+			@apply border-zinc-200 snap-center border-x border-b border-solid;
 
 			&.grid {
-				@apply border-t-0;
+				@apply border-b-0;
 
 				> * {
 					@apply border-x-0;
@@ -171,10 +177,10 @@
 		}
 
 		.half {
-			border-top-style: dotted;
+			border-bottom-style: dotted;
 		}
 		.quarter {
-			border-top-style: dashed;
+			border-bottom-style: dashed;
 		}
 	}
 </style>
