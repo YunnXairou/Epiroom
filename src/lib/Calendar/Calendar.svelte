@@ -127,7 +127,7 @@
 					<slot {e} />
 				</SubGrid>
 			{:else}
-				<div class="{g.cls} relative" style="grid-area: {g.area.offset}">
+				<div class="{g.cls} relative -z-10" style="grid-area: {g.area.offset}">
 					<slot e={g.events} />
 				</div>
 			{/if}
