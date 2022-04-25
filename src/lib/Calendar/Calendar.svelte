@@ -2,6 +2,7 @@
 	import { range, isEmpty } from 'lodash-es';
 	import { DateTime } from 'luxon';
 	import GridFilling from './GridFilling.svelte';
+	import SubGrid from './SubGrid.svelte';
 
 	export let steps: 1 | 2 | 4 = 4;
 	export let from = 8;
@@ -35,17 +36,12 @@
 			let rstart = sdx * steps + Math.floor(start.minute / (60 / steps));
 			let rend = edx * steps + Math.ceil(end.minute / (60 / steps));
 
-			console.log('---');
-			console.log(rstart, rend);
-
 			if (sdx < 0)
 				rstart = Math.max(
 					0,
 					(sections[0] > start.hour ? rend : sections.length * steps) -
 						Math.ceil(end.diff(start, 'minutes').minutes / (60 / steps))
 				);
-
-			console.log(rstart, rend);
 
 			if (edx < 0 || rstart == rend)
 				rend = Math.min(
@@ -56,16 +52,11 @@
 							: Math.ceil(end.diff(start, 'minutes').minutes / (60 / steps)))
 				);
 
-			console.log(rstart, rend);
-
 			if (sections[0] <= start.hour && sdx < 0)
 				rstart =
 					rend - Math.ceil(steps - ((end.diff(start, 'minutes').minutes / (60 / steps)) % steps));
 
-			console.log(rstart, rend);
-
-			for (let jdx = 0; jdx < prev.length; jdx++) {
-				console.log(prev[jdx].area.start, rstart, prev[jdx].area.end, rend);
+			for (let jdx = 0; jdx < prev.length; jdx++)
 				if (
 					(prev[jdx].area.start >= rstart && prev[jdx].area.end >= rstart) ||
 					(prev[jdx].area.start < rend && prev[jdx].area.end >= rend)
@@ -77,7 +68,6 @@
 					}
 					return prev;
 				}
-			}
 
 			return [
 				...prev,
@@ -122,7 +112,7 @@
 
 		{#each v as g}
 			{#if g.events.length > 1}
-				<div class="{g.cls} bg-red-400" style="grid-area: {g.area.offset}" />
+				<SubGrid {classMatrix} {steps} {...g} />
 			{:else}
 				<div class="{g.cls} bg-slate-400" style="grid-area: {g.area.offset}" />
 			{/if}
