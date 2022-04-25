@@ -91,7 +91,14 @@
 		}, [])
 	]);
 	$: skipArea = Object.values(data.flatMap((_) => _[1]).map((_) => _.area.inset));
-	$: console.log(data);
+
+	function offsetMatrix(start) {
+		let offset = Array.from(classMatrix);
+
+		for (let i = 0; i < start % steps; i++) offset.push(offset.shift());
+
+		return offset;
+	}
 </script>
 
 <div
@@ -112,7 +119,7 @@
 
 		{#each v as g}
 			{#if g.events.length > 1}
-				<SubGrid {classMatrix} {steps} {...g} />
+				<SubGrid classMatrix={offsetMatrix(g.area.start)} {steps} {...g} />
 			{:else}
 				<div class="{g.cls} bg-slate-400" style="grid-area: {g.area.offset}" />
 			{/if}
