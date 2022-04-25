@@ -8,7 +8,12 @@
 	export let classMatrix: string[];
 
 	export let cls: string;
-	export let events: any[] = [];
+	export let events: {
+		meta: {
+			start: number;
+			end: number;
+		};
+	}[] = [];
 	export let area: {
 		start: number;
 		end: number;
@@ -18,12 +23,10 @@
 	$: rows = area.end - area.start;
 	$: colsMatrix = Array.from({ length: rows }, () => []);
 	$: areas = Array.from({ length: events.length }, (_, idx) => {
-		const ev = events[idx];
-		const _start = DateTime.fromFormat(ev.start, 'yyyy-L-d h:m:s');
-		const _end = DateTime.fromFormat(ev.end, 'yyyy-L-d h:m:s');
+		const meta = events[idx].meta;
 
-		const ds = Math.floor(_start.diff(start, 'minutes').minutes / (60 / steps));
-		const de = Math.ceil(_end.diff(start, 'minutes').minutes / (60 / steps));
+		const ds = area.start - meta.start;
+		const de = meta.end - area.start;
 
 		let col = 0;
 

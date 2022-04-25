@@ -56,6 +56,8 @@
 				rstart =
 					rend - Math.ceil(steps - ((end.diff(start, 'minutes').minutes / (60 / steps)) % steps));
 
+			cur['meta'] = { start: rstart, end: rend };
+
 			for (let jdx = 0; jdx < prev.length; jdx++)
 				if (
 					(prev[jdx].area.start >= rstart && prev[jdx].area.end >= rstart) ||
