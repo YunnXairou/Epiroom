@@ -27,7 +27,7 @@
 
 		let col = 0;
 
-		for (let i = ds; i < de; i++) {
+		for (let i = ds; i < de && i < rows; i++) {
 			colsMatrix[i].push(1);
 			col = Math.max(col, colsMatrix[i].length);
 		}
@@ -45,13 +45,13 @@
 </script>
 
 <div
-	class="{cls} bg-red-400 grid gap-x-px"
+	class="{cls} grid gap-x-px"
 	style="grid-area: {area.offset};
     grid-template-columns: repeat({cols}, 1fr); 
     grid-template-rows: repeat({rows}, {(20 * 4) / steps}px);"
 >
 	{#each events as e, i}
-		<div class="{getCls(e)} bg-blue-200" style="grid-area: {areas[i]}" />
+		<div class="{getCls(e)} bg-slate-400" style="grid-area: {areas[i]}" />
 	{/each}
 
 	<GridFilling {rows} {cols} {classMatrix} skipArea={areas} />

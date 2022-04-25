@@ -160,7 +160,11 @@
 			@apply border-zinc-200 snap-center border-x border-t border-solid;
 
 			&.grid {
-				@apply border-none;
+				@apply border-t-0;
+
+				> * {
+					@apply border-x-0;
+				}
 			}
 		}
 
