@@ -4,8 +4,8 @@ module.exports = {
 	theme: {
 		extend: {},
 		nightwind: {
-		  typography: true,
+			typography: true
 		}
 	},
-	plugins: [require('nightwind'),   require('@tailwindcss/typography')]
+	plugins: [require('nightwind'), require('@tailwindcss/typography')]
 };

@@ -1,6 +1,6 @@
-import { DateTime } from "luxon";
+import { DateTime } from 'luxon';
 
-export async function get({params: {country, city, date}}) {
+export async function get({ params: { country, city, date } }) {
 	let start: DateTime = DateTime.fromFormat(date, 'yyyy-L-d');
 	if (!start.isValid) start = DateTime.fromFormat(date, 'L-d');
 	if (!start.isValid) start = DateTime.fromFormat(date, 'd');

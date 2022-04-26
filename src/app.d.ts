@@ -8,9 +8,9 @@ declare namespace App {
 	// interface Session {}
 	interface Stuff {
 		locations: {
-			[k:string]: {
-				title:string
-			}
-		}
+			[k: string]: {
+				title: string;
+			};
+		};
 	}
 }
