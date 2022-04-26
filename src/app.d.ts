@@ -6,5 +6,11 @@ declare namespace App {
 	// interface Locals {}
 	// interface Platform {}
 	// interface Session {}
-	// interface Stuff {}
+	interface Stuff {
+		locations: {
+			[k:string]: {
+				title:string
+			}
+		}
+	}
 }
