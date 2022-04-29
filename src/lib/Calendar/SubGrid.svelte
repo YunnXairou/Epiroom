@@ -25,7 +25,7 @@
 	$: areas = Array.from({ length: events.length }, (_, idx) => {
 		const meta = events[idx].meta;
 
-		const ds = area.start - meta.start;
+		const ds = meta.start - area.start;
 		const de = meta.end - area.start;
 
 		let col = 0;

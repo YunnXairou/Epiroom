@@ -27,8 +27,8 @@
 	$: data = Object.entries(events).map(([k, v], cdx) => [
 		k,
 		v.reduce((prev, cur) => {
-			const start = DateTime.fromFormat(cur.start, 'yyyy-L-d h:m:s');
-			const end = DateTime.fromFormat(cur.end, 'yyyy-L-d h:m:s');
+			const start = DateTime.fromFormat(cur.start, 'yyyy-L-d TT');
+			const end = DateTime.fromFormat(cur.end, 'yyyy-L-d TT');
 
 			const sdx = sections.indexOf(start.hour);
 			const edx = sections.indexOf(end.hour);
@@ -58,9 +58,9 @@
 
 			cur['meta'] = { start: rstart, end: rend };
 
-			for (let jdx = 0; jdx < prev.length; jdx++)
+			for (let jdx = 0; jdx < prev.length; jdx++) {
 				if (
-					(prev[jdx].area.start >= rstart && prev[jdx].area.end >= rstart) ||
+					(prev[jdx].area.start <= rstart && prev[jdx].area.end > rstart) ||
 					(prev[jdx].area.start < rend && prev[jdx].area.end >= rend)
 				) {
 					prev[jdx].events.push(cur);
@@ -70,6 +70,7 @@
 					}
 					return prev;
 				}
+			}
 
 			return [
 				...prev,
@@ -128,7 +129,7 @@
 				</SubGrid>
 			{:else}
 				<div class="{g.cls} relative -z-10" style="grid-area: {g.area.offset}">
-					<slot e={g.events} />
+					<slot e={g.events[0]} />
 				</div>
 			{/if}
 		{/each}
