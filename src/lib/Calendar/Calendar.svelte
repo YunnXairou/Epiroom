@@ -115,7 +115,7 @@
 
 	{#each data as [k, v]}
 		<span
-			class="bg-white text-center text-zinc-800 sticky top-0 snap-center truncate p-2 border-b"
+			class="bg-white text-center text-zinc-800 sticky top-0 snap-center truncate p-2 border-b z-20"
 			dir="rtl"
 			id={k}
 		>
@@ -128,7 +128,7 @@
 					<slot {e} />
 				</SubGrid>
 			{:else}
-				<div class="{g.cls} relative -z-10" style="grid-area: {g.area.offset}">
+				<div class="{g.cls} relative z-10" style="grid-area: {g.area.offset}">
 					<slot e={g.events[0]} />
 				</div>
 			{/if}
@@ -137,7 +137,7 @@
 
 	{#each sections as h, i}
 		<span
-			class="bg-white text-zinc-800 text-center sticky top-[5ch] left-0 border-b border-r"
+			class="bg-white text-zinc-800 text-center sticky top-[5ch] left-0 border-b border-r z-30"
 			style="grid-row: {gridRow(i)}"
 		>
 			{h}:00

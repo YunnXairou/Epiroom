@@ -55,7 +55,7 @@
 	<h4>
 		{startHour} - {endHour}
 	</h4>
-	<div class="px-2 p-1">
+	<div class="px-2 p-1 overflow-hidden">
 		<a href="http://intra.epitech.eu/module/{scolaryear}/{codemodule}/{codeinstance}/{codeacti}/">
 			{titlemodule} » {acti_title}
 		</a>
@@ -75,12 +75,16 @@
 
 <style lang="postcss" global>
 	:local(.appoint) {
-		@apply overflow-hidden text-gray-600 -mx-px;
+		@apply text-gray-600 -mx-px;
 		@apply bg-blue-300/50;
 		height: calc(100% + 1px);
 		h4 {
 			@apply block overflow-hidden whitespace-nowrap font-semibold  px-2 text-white;
 			@apply bg-blue-500/70;
+
+			+ div {
+				height: calc(100% - 1.5em);
+			}
 		}
 		a {
 			@apply text-current no-underline hover:underline;
@@ -107,6 +111,11 @@
 			@apply bg-rose-300/50;
 			h4 {
 				@apply bg-rose-500/70;
+			}
+
+			&::before {
+				@apply absolute -top-[40px] left-0 right-0 h-[40px] bg-gradient-to-t from-rose-500/70;
+				content: '';
 			}
 		}
 	}
