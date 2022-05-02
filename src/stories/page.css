@@ -37,7 +37,7 @@ section li {
 }
 
 section .tip {
-	@apply bg-lime-100 text-lime-500;
+	@apply text-lime-500 bg-lime-100;
 
 	display: inline-block;
 	border-radius: 1em;

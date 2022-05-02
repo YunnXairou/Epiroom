@@ -2,7 +2,10 @@ module.exports = {
 	darkMode: 'class',
 	content: ['./src/**/*.{html,js,svelte,ts}'],
 	theme: {
-		extend: {}
+		extend: {},
+		nightwind: {
+			typography: true
+		}
 	},
-	plugins: [require('nightwind')]
+	plugins: [require('nightwind'), require('@tailwindcss/typography')]
 };

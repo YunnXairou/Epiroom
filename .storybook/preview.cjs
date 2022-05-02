@@ -9,6 +9,14 @@ export const parameters = {
 			color: /(background|color)$/i,
 			date: /Date$/
 		}
+	},
+	paddings: {
+		values: [
+			{ name: 'Small', value: '16px' },
+			{ name: 'Medium', value: '32px' },
+			{ name: 'Large', value: '64px' }
+		],
+		default: 'Medium'
 	}
 };
 
