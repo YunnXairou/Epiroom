@@ -3,7 +3,6 @@
 
 	import Calendar from './Calendar.svelte';
 	import calendarData from './fixtures.json';
-	import { withFixtures } from 'storybook-fixtures';
 </script>
 
 <Meta

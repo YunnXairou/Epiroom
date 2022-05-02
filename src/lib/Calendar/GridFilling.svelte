@@ -1,7 +1,7 @@
 <script lang="ts">
 	export let rows: number;
 	export let cols: number;
-	export let flowRow: boolean = true;
+	export let flowRow = true;
 	export let classMatrix: string[] = [];
 	export let skipArea: string[] = [];
 

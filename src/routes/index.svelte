@@ -4,12 +4,10 @@
 	const { locations } = $page.stuff;
 	const { country } = $page?.params || { country: null };
 
-	$: countries = Object.entries(locations).filter(([k, _]) => !k.includes('/'));
+	$: countries = Object.entries(locations).filter(([k]) => !k.includes('/'));
 
 	const cities = (c) =>
-		Object.entries(locations).filter(
-			([k, _]) => k.startsWith(c + '/') && k.split('/').length === 2
-		);
+		Object.entries(locations).filter(([k]) => k.startsWith(c + '/') && k.split('/').length === 2);
 </script>
 
 <div class="mx-auto prose">
