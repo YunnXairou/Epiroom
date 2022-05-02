@@ -22,13 +22,13 @@ export async function get({ params: { country, city, date } }) {
 		status: 200,
 		body: {
 			data: Object.entries(
-					groupBy(
-						res
-							.sort((a, b) => a.start.localeCompare(b.start))
-							.filter(({ room: { code } }) => !['Visio', undefined].includes(code)),
-						'room.code'
-					)
-				).sort(([a], [b]) => a.localeCompare(b))
+				groupBy(
+					res
+						.sort((a, b) => a.start.localeCompare(b.start))
+						.filter(({ room: { code } }) => !['Visio', undefined].includes(code)),
+					'room.code'
+				)
+			).sort(([a], [b]) => a.localeCompare(b))
 		}
 	};
 }

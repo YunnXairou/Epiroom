@@ -79,7 +79,7 @@
 		@apply bg-blue-300/50;
 		height: calc(100% + 1px);
 		h4 {
-			@apply block overflow-hidden whitespace-nowrap font-semibold  px-2 text-white;
+			@apply text-white block overflow-hidden whitespace-nowrap  px-2 font-semibold;
 			@apply bg-blue-500/70;
 
 			+ div {
@@ -87,7 +87,7 @@
 			}
 		}
 		a {
-			@apply text-current no-underline hover:underline;
+			@apply no-underline text-current hover:underline;
 		}
 		&.tp {
 			@apply bg-purple-300/50;
