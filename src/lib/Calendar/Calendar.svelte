@@ -5,7 +5,7 @@
 	import SubGrid from './SubGrid.svelte';
 
 	export let steps: 1 | 2 | 4 = 4;
-	export let from = 8;
+	export let from = 9;
 	export let to = 20;
 	export let events: {
 		[k: string]: {

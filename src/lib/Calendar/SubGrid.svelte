@@ -28,13 +28,17 @@
 		const ds = meta.start - area.start;
 		const de = meta.end - area.start;
 
-		let col = 0;
-
+		let banned_col = [];
 		for (let i = ds; i < de && i < rows; i++) {
-			colsMatrix[i].push(1);
-			col = Math.max(col, colsMatrix[i].length);
+			banned_col.push(...colsMatrix[i]);
+			colsMatrix[i].push(idx);
 		}
 
+		let col = 0;
+		banned_col = [...new Set(banned_col)].map((i) => events[i].meta['col']);
+		for (let i = 1; i <= idx + 1 && !col; i++) if (!banned_col.includes(i)) col = i;
+
+		events[idx].meta['col'] = col;
 		return `${ds + 1}/${col}/${de + 1}/auto`;
 	});
 	$: cols = Math.max(...colsMatrix.map((_) => _.length));
@@ -54,7 +58,7 @@
     grid-template-rows: repeat({rows}, {(20 * 4) / steps}px);"
 >
 	{#each events as e, i}
-		<div class="{getCls(e)} relative -z-10" style="grid-area: {areas[i]}">
+		<div class="{getCls(e)} relative z-10" style="grid-area: {areas[i]}">
 			<slot {e} />
 		</div>
 	{/each}

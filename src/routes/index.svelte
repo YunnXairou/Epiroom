@@ -24,3 +24,12 @@
 		</details>
 	{/each}
 </div>
+
+<style>
+	li::marker {
+		content: '├─';
+	}
+	li:last-child::marker {
+		content: '└─';
+	}
+</style>
