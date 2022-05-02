@@ -54,7 +54,7 @@
 <div
 	class="{cls} grid gap-x-px"
 	style="grid-area: {area.offset};
-    grid-template-columns: repeat({cols}, 1fr); 
+    grid-template-columns: repeat({cols}, calc(100% / {cols} - 0.5px)); 
     grid-template-rows: repeat({rows}, {(20 * 4) / steps}px);"
 >
 	{#each events as e, i}
