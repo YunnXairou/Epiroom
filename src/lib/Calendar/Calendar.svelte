@@ -5,7 +5,7 @@
 	import SubGrid from './SubGrid.svelte';
 
 	export let steps: 1 | 2 | 4 = 4;
-	export let from = 8;
+	export let from = 9;
 	export let to = 20;
 	export let events: {
 		[k: string]: {
@@ -27,8 +27,8 @@
 	$: data = Object.entries(events).map(([k, v], cdx) => [
 		k,
 		v.reduce((prev, cur) => {
-			const start = DateTime.fromFormat(cur.start, 'yyyy-L-d h:m:s');
-			const end = DateTime.fromFormat(cur.end, 'yyyy-L-d h:m:s');
+			const start = DateTime.fromFormat(cur.start, 'yyyy-L-d TT');
+			const end = DateTime.fromFormat(cur.end, 'yyyy-L-d TT');
 
 			const sdx = sections.indexOf(start.hour);
 			const edx = sections.indexOf(end.hour);
@@ -58,9 +58,9 @@
 
 			cur['meta'] = { start: rstart, end: rend };
 
-			for (let jdx = 0; jdx < prev.length; jdx++)
+			for (let jdx = 0; jdx < prev.length; jdx++) {
 				if (
-					(prev[jdx].area.start >= rstart && prev[jdx].area.end >= rstart) ||
+					(prev[jdx].area.start <= rstart && prev[jdx].area.end > rstart) ||
 					(prev[jdx].area.start < rend && prev[jdx].area.end >= rend)
 				) {
 					prev[jdx].events.push(cur);
@@ -70,6 +70,7 @@
 					}
 					return prev;
 				}
+			}
 
 			return [
 				...prev,
@@ -114,7 +115,7 @@
 
 	{#each data as [k, v]}
 		<span
-			class="bg-white text-center text-zinc-800 sticky top-0 snap-center truncate p-2 border-b"
+			class="bg-white text-center text-zinc-800 sticky top-0 snap-center truncate p-2 border-b z-20"
 			dir="rtl"
 			id={k}
 		>
@@ -127,8 +128,8 @@
 					<slot {e} />
 				</SubGrid>
 			{:else}
-				<div class="{g.cls} relative -z-10" style="grid-area: {g.area.offset}">
-					<slot e={g.events} />
+				<div class="{g.cls} relative z-10" style="grid-area: {g.area.offset}">
+					<slot e={g.events[0]} />
 				</div>
 			{/if}
 		{/each}
@@ -136,7 +137,7 @@
 
 	{#each sections as h, i}
 		<span
-			class="bg-white text-zinc-800 text-center sticky top-[5ch] left-0 border-b border-r"
+			class="bg-white text-zinc-800 text-center sticky top-[5ch] left-0 border-b border-r z-30"
 			style="grid-row: {gridRow(i)}"
 		>
 			{h}:00

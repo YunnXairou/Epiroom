@@ -60,6 +60,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@tailwindcss/typography": "^0.5.2",
 		"lodash-es": "^4.17.21",
 		"luxon": "^2.3.1"
 	}
