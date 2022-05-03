@@ -61,14 +61,22 @@
 
 <div
 	title="{codemodule} » {acti_title} » {room.title}, from {startHour} to {endHour}"
-	class="appoint {type_code} relative overflow-hidden"
+	class="appoint {type_code} relative overflow-hidden cursor-pointer"
 	class:small
+	on:click={() =>
+		window.open(
+			`http://intra.epitech.eu/module/${scolaryear}/${codemodule}/${codeinstance}/${codeacti}/`,
+			'_blank'
+		)}
 >
 	<h4>
 		{startHour} - {endHour}
 	</h4>
 	<div class="px-2 p-1 overflow-hidden">
-		<a href="http://intra.epitech.eu/module/{scolaryear}/{codemodule}/{codeinstance}/{codeacti}/">
+		<a
+			href="http://intra.epitech.eu/module/{scolaryear}/{codemodule}/{codeinstance}/{codeacti}/"
+			target="_blank"
+		>
 			{titlemodule} » {acti_title}
 		</a>
 		<br />
