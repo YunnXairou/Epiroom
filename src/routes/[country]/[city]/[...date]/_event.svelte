@@ -46,11 +46,23 @@
 	$: room = room || { code: null, type: null, seats: null, title: null };
 	$: startHour = DateTime.fromFormat(start || '', 'yyyy-LL-dd TT').toFormat('HH:mm');
 	$: endHour = DateTime.fromFormat(end || '', 'yyyy-LL-dd TT').toFormat('HH:mm');
+	$: small =
+		DateTime.fromFormat(end || '', 'yyyy-LL-dd TT').diff(
+			DateTime.fromFormat(start || '', 'yyyy-LL-dd TT'),
+			'hour'
+		).hours < 1;
 </script>
+
+{#if type_code == ActivityTypeCode.exam}
+	<span
+		class="absolute -top-[40px] -left-px -right-px h-[40px] bg-gradient-to-t from-rose-500/70"
+	/>
+{/if}
 
 <div
 	title="{codemodule} » {acti_title} » {room.title}, from {startHour} to {endHour}"
-	class="appoint {type_code} relative"
+	class="appoint {type_code} relative overflow-hidden"
+	class:small
 >
 	<h4>
 		{startHour} - {endHour}
@@ -78,6 +90,11 @@
 		@apply text-gray-600 -mx-px;
 		@apply bg-blue-300/50;
 		height: calc(100% + 1px);
+
+		&.small {
+			font-size: 75%;
+		}
+
 		h4 {
 			@apply text-white block overflow-hidden whitespace-nowrap  px-2 font-semibold;
 			@apply bg-blue-500/70;
@@ -111,11 +128,6 @@
 			@apply bg-rose-300/50;
 			h4 {
 				@apply bg-rose-500/70;
-			}
-
-			&::before {
-				@apply absolute -top-[40px] left-0 right-0 h-[40px] bg-gradient-to-t from-rose-500/70;
-				content: '';
 			}
 		}
 	}
