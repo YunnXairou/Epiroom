@@ -1,13 +1,9 @@
 export async function get() {
-	const { locations } = await fetch(
+	const  locations  = await fetch(
 		`https://intra.epitech.eu/${process.env['EPITECH_API_KEY']}location.js`
 	)
 		.then((res) => res.text())
-		.then((res) => {
-			const window = { locations: {} };
-			eval(res);
-			return window;
-		});
+		.then((raw) => ( JSON.parse(raw.replace(/^[^=]*=/, '').replace(/;/, '')) ));
 
 	return {
 		body: { locations },
