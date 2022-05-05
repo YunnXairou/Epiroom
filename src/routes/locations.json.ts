@@ -1,9 +1,9 @@
+import { fetch } from '$lib/api';
+
 export async function get() {
-	const  locations  = await fetch(
-		`https://intra.epitech.eu/${process.env['EPITECH_API_KEY']}location.js`
-	)
+	const locations = await fetch(`location.js`)
 		.then((res) => res.text())
-		.then((raw) => ( JSON.parse(raw.replace(/^[^=]*=/, '').replace(/;/, '')) ));
+		.then((raw) => JSON.parse(raw.replace(/^[^=]*=/, '').replace(/;/, '')));
 
 	return {
 		body: { locations },
