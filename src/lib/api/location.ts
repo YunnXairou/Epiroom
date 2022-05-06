@@ -1,7 +1,7 @@
 import { isObject, isArray } from 'lodash-es';
 import fetch from './fetch';
 
-declare type Locations = { [key: string]: LocationMeta };
+export type Locations = { [key: string]: LocationMeta };
 declare type LocationMeta = {
 	title: string;
 	floor?: number;

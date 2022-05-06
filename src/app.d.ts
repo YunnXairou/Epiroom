@@ -7,10 +7,6 @@ declare namespace App {
 	// interface Platform {}
 	// interface Session {}
 	interface Stuff {
-		locations: {
-			[k: string]: {
-				title: string;
-			};
-		};
+		locations: import('$lib/api').Locations;
 	}
 }
