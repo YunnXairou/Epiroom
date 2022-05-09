@@ -2,7 +2,7 @@ import { isObject, isArray } from 'lodash-es';
 import fetch from './fetch';
 
 export type Locations = { [key: string]: LocationMeta };
-declare type LocationMeta = {
+export type LocationMeta = {
 	title: string;
 	floor?: number;
 	disabled?: boolean;
@@ -47,8 +47,6 @@ const locationTreeToJson = (
 			if (!isObject(tree[key]) || isArray(tree[key])) json[path][key] = tree[key];
 			else if (fn([`${path}/${key}`, tree[key]])) propagate(tree[key], `${path}/${key}`);
 		}
-
-		console.log(path, json[path]);
 	}
 
 	for (const [k, v] of Object.entries(tree)) propagate(v, k);

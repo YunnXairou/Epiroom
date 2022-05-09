@@ -6,7 +6,7 @@
 
 	$: countries = Object.entries(locations).filter(([k]) => !k.includes('/'));
 
-	const cities = (c) =>
+	const cities = (c: string) =>
 		Object.entries(locations).filter(([k]) => k.startsWith(c + '/') && k.split('/').length === 2);
 </script>
 

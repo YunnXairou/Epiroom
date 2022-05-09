@@ -9,6 +9,7 @@
 
 	export let cls: string;
 	export let events: {
+		start: string;
 		meta: {
 			start: number;
 			end: number;
@@ -43,7 +44,7 @@
 	});
 	$: cols = Math.max(...colsMatrix.map((_) => _.length));
 
-	function getCls(ev) {
+	function getCls(ev: { start: string }) {
 		const _start = DateTime.fromFormat(ev.start, 'yyyy-L-d h:m:s');
 		const ds = Math.floor(_start.diff(start, 'minutes').minutes / (60 / steps));
 

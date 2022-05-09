@@ -1,49 +1,21 @@
 <script lang="ts">
+	import type { PlanningEvent, LocationMeta } from '$lib/api';
+
+	import { ActivityTypeCode } from '$lib/api';
 	import { DateTime } from 'luxon';
 
-	enum ActivityTypeCode {
-		other = 'other',
-		class = 'class',
-		tp = 'tp',
-		rdv = 'rdv',
-		exam = 'exam',
-		proj = 'proj'
-	}
-	type DatetimeLiteral = `${number}-${number}-${number} ${number}:${number}:${number}`;
-	type ModulePrefix = 'B' | 'M' | 'C' | 'G' | 'W' | 'T';
-	type ModuleCode = `${ModulePrefix}-${string}-${number}`;
-	type InstanceCode = `${string}-${number}-${number}`;
-	type ActivityCode = `acti-${number}`;
+	export let scolaryear: PlanningEvent['scolaryear'];
+	export let codemodule: PlanningEvent['codemodule'];
+	export let codeinstance: PlanningEvent['codeinstance'];
+	export let codeacti: PlanningEvent['codeacti'];
+	export let titlemodule: PlanningEvent['titlemodule'];
+	export let acti_title: PlanningEvent['acti_title'];
+	export let start: PlanningEvent['start'];
+	export let end: PlanningEvent['end'];
+	export let total_students_registered: PlanningEvent['total_students_registered'];
+	export let type_code: PlanningEvent['type_code'];
+	export let room: PlanningEvent['room'] & LocationMeta;
 
-	interface RawRoom {
-		code: `${string}/${string}/${string}` | null;
-		type:
-			| 'bureau'
-			| 'exterieur'
-			| 'salle-de-reunion'
-			| 'salle_de_cours'
-			| 'salle-de-cours-td'
-			| 'hub';
-		seats: number | null;
-	}
-
-	export let scolaryear: number;
-	export let codemodule: ModuleCode;
-	export let codeinstance: InstanceCode;
-	export let codeacti: ActivityCode;
-	export let titlemodule: string;
-	export let acti_title: string;
-	export let start: DatetimeLiteral;
-	export let end: DatetimeLiteral;
-	export let total_students_registered: number;
-	export let type_code: ActivityTypeCode;
-	export let room:
-		| null
-		| (RawRoom & {
-				title: string;
-		  });
-
-	$: room = room || { code: null, type: null, seats: null, title: null };
 	$: startHour = DateTime.fromFormat(start || '', 'yyyy-LL-dd TT').toFormat('HH:mm');
 	$: endHour = DateTime.fromFormat(end || '', 'yyyy-LL-dd TT').toFormat('HH:mm');
 	$: small =
