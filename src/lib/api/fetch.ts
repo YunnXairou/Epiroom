@@ -1,12 +1,19 @@
-export default (input: RequestInfo, init?: RequestInit) => {
-	const baseUrl = (() => {
-		let token = process.env['EPITECH_API_KEY'].replace(/\/$/, '');
+import { DateTime } from 'luxon';
 
-		if (!token.startsWith('https://intra.epitech.eu/')) token = `https://intra.epitech.eu/` + token;
+export default (input: RequestInfo) => {
+	const url =
+		(() => {
+			let token = process.env['EPITECH_API_KEY'].replace(/\/$/, '');
 
-		return `${token}/`;
-	})();
+			if (!token.startsWith('https://intra.epitech.eu/'))
+				token = `https://intra.epitech.eu/` + token;
 
-	const url = baseUrl + input;
-	return fetch(url, init);
-};
+			return `${token}/`;
+		})() + input;
+
+	return fetch(url, {
+		headers: {
+			cookie: `tz=${DateTime.local().zoneName}`
+		}
+	});
+}

@@ -1,5 +1,5 @@
-import { isObject, isArray } from 'lodash-es';
 import fetch from './fetch';
+import { isObject, isArray } from 'lodash-es';
 
 export type Locations = { [key: string]: LocationMeta };
 export type LocationMeta = {

@@ -1,5 +1,5 @@
-import { DateTime } from 'luxon';
 import fetch from './fetch';
+import { DateTime } from 'luxon';
 
 export enum ActivityTypeCode {
 	other = 'other',
