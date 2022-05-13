@@ -19,6 +19,7 @@ export async function get({ params: { country, city, date } }) {
 	return {
 		status: 200,
 		body: {
+			params: {campus, date},
 			data: Object.entries(
 				groupBy(
 					res
