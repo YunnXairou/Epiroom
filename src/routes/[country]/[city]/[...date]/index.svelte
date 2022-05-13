@@ -27,7 +27,7 @@
 </script>
 
 <div class="flex flex-col max-h-screen">
-	<div class="flex">
+	<div class="flex text-zinc-700">
 		<a
 			class="cursor-pointer"
 			href="/{params.campus}/{date.minus({ day: 1 }).toFormat('yyyy-LL-dd')}"
@@ -41,15 +41,24 @@
 				stroke="currentColor"
 				stroke-width="2"
 				stroke-linecap="round"
-				stroke-linejoin="round"
-				class="feather feather-chevron-left"><polyline points="15 18 9 12 15 6" /></svg
+				stroke-linejoin="round"><polyline points="15 18 9 12 15 6" /></svg
 			>
 		</a>
 		<div class="flex flex-1 flex-col">
 			<h1 class="text-2xl text-bold pt-1 text-center text-zinc-800">
 				{locations[params.campus].title}
 			</h1>
-			<h2 class="text-xl pb-2 text-center text-zinc-700">{date.toFormat('d LLL yyyy')}</h2>
+			<div class="text-xl pb-2 text-center text-zinc-700">
+				<label for="date">
+					{date.toLocaleString(DateTime.DATE_HUGE)}
+				</label>
+				<input
+					on:change={(e) => location.replace(`/${params.campus}/${e.target.value}`)}
+					class="w-6"
+					type="date"
+					id="data"
+				/>
+			</div>
 		</div>
 		<a
 			class="cursor-pointer"
@@ -64,8 +73,7 @@
 				stroke="currentColor"
 				stroke-width="2"
 				stroke-linecap="round"
-				stroke-linejoin="round"
-				class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6" /></svg
+				stroke-linejoin="round"><polyline points="9 18 15 12 9 6" /></svg
 			>
 		</a>
 	</div>
