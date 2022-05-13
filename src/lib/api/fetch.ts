@@ -13,7 +13,7 @@ export default (input: RequestInfo) => {
 
 	return fetch(url, {
 		headers: {
-			cookie: `tz=${DateTime.local().zoneName}`
+			// cookie: `tz=${DateTime.local().zoneName}` //@todo: get timezone from client and not server
 		}
 	});
 }
