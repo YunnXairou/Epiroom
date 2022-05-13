@@ -1,14 +1,18 @@
-export async function get() {
-	const  locations  = await fetch(
-		`https://intra.epitech.eu/${process.env['EPITECH_API_KEY']}location.js`
-	)
-		.then((res) => res.text())
-		.then((raw) => ( JSON.parse(raw.replace(/^[^=]*=/, '').replace(/;/, '')) ));
+import { getLocations } from '$lib/api';
 
-	return {
-		body: { locations },
-		headers: {
-			'Cache-Control': 'max-age=86400, immutable'
-		}
-	};
-}
+export const get = async () => ({
+	body: {
+		locations: await getLocations(([, v]) => !v.disabled).then((json) =>
+			Object.fromEntries(
+				Object.entries(json).filter(
+					([k], _, arr) =>
+						k.split('/').length > 2 ||
+						arr.filter(([_k]) => _k.startsWith(k) && _k.split('/').length > 2).length > 1
+				)
+			)
+		)
+	},
+	headers: {
+		'Cache-Control': 'max-age=86400, immutable'
+	}
+});
