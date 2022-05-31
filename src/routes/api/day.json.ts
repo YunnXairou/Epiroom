@@ -11,7 +11,8 @@ export async function get({ url: { searchParams } }) {
 	const schedule = await getDaySchedule(campus, start);
 
 	for (const event of schedule) {
-		event.room = Object.assign(event.room, locations[event.room.code]);
+		if (event?.room?.code)
+			event.room = Object.assign(event.room, locations[event.room.code]);
 	}
 
 	return {
