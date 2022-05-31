@@ -1,5 +1,3 @@
-import { DateTime } from 'luxon';
-
 export default (input: RequestInfo) => {
 	const url =
 		(() => {
@@ -16,4 +14,4 @@ export default (input: RequestInfo) => {
 			// cookie: `tz=${DateTime.local().zoneName}` //@todo: get timezone from client and not server
 		}
 	});
-}
+};

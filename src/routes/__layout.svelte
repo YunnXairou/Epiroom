@@ -1,6 +1,6 @@
 <script lang="ts" context="module">
 	export async function load({ fetch }) {
-		const response = await fetch('/locations.json');
+		const response = await fetch('/api/locations.json');
 		return {
 			status: response.status,
 			stuff: {
